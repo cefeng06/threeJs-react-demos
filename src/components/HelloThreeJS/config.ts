@@ -49,8 +49,8 @@ export const planetConfigs: { [key: string]: TypePlantData } = {
         name: 'Earth',
         selfRadius: 5,
         orbitRadius: 75,
-        rotateSpeed: 0.09,
-        revolveSpeed: 2.1,
+        rotateSpeed: 0.01,
+        revolveSpeed: 1.1,
         img: require('./static/earth.jpg')
     },
     'Mars': {
@@ -58,7 +58,7 @@ export const planetConfigs: { [key: string]: TypePlantData } = {
         selfRadius: 4,
         orbitRadius: 90,
         rotateSpeed: 0.05,
-        revolveSpeed: 3,
+        revolveSpeed: 1,
         img: require('./static/mars.png')
     },
     'Jupiter': {
@@ -90,7 +90,7 @@ export const planetConfigs: { [key: string]: TypePlantData } = {
         selfRadius: 5,
         orbitRadius: 190,
         rotateSpeed: 0.01,
-        revolveSpeed: 3.2,
+        revolveSpeed: 1.2,
         img: require('./static/naptune.jpg')
     }
 }

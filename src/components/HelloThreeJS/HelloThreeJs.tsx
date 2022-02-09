@@ -3,6 +3,7 @@ import { Scene, WebGLRenderer, PerspectiveCamera, MeshPhongMaterial, Mesh, Direc
 import { planetConfigs } from "./config";
 import { AxesHelper } from 'three/src/helpers/AxesHelper'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import Stats from 'three/examples/jsm/libs/stats.module'
 
 
 export const HelloThreeJS: FC = () => {
@@ -11,7 +12,9 @@ export const HelloThreeJS: FC = () => {
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const resizeHandleRef = useRef<(renderer: WebGLRenderer, camera: PerspectiveCamera) => void>();
-
+    // 添加stats监控
+    const stats = Stats();
+    document.body.appendChild(stats.dom);
 
     const loadPlanet = (key: string, scene: Scene) => {
         const planetData = planetConfigs[key];
@@ -92,8 +95,10 @@ export const HelloThreeJS: FC = () => {
                 camera.updateProjectionMatrix();
                 renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
                 renderer.render(scene, camera);
+                stats.update();
                 window.requestAnimationFrame(render);
             }
+            const controls = new OrbitControls(camera, renderer.domElement)
             window.requestAnimationFrame(render);
             handleResize(renderer, camera); //默认打开时，即重新触发一次
             resizeHandleRef.current = handleResize;
@@ -117,6 +122,6 @@ export const HelloThreeJS: FC = () => {
     };
 
     return (
-        <canvas width={2400} height={1200} style={{ display: 'block' }} ref={canvasRef}></canvas>
+        <canvas width={2000} height={1200} style={{ display: 'block' }} ref={canvasRef}></canvas>
     );
 }
