@@ -1,5 +1,5 @@
 import { useRef, useEffect, FC } from "react";
-import { Scene, WebGLRenderer, PerspectiveCamera, MeshPhongMaterial, Mesh, DirectionalLight, SphereBufferGeometry, TextureLoader, MeshBasicMaterial, MeshLambertMaterial, RingGeometry, DoubleSide, BoxBufferGeometry, Clock, PointLight, MeshStandardMaterial, Color } from 'three';
+import { Scene, WebGLRenderer, PerspectiveCamera, MeshPhongMaterial, Mesh, DirectionalLight, SphereBufferGeometry, TextureLoader, MeshBasicMaterial, MeshLambertMaterial, RingGeometry, DoubleSide, BoxBufferGeometry, Clock, PointLight, MeshStandardMaterial, Color, AmbientLight } from 'three';
 import { planetConfigs } from "./config";
 import { AxesHelper } from 'three/src/helpers/AxesHelper'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -21,7 +21,7 @@ export const HelloThreeJS: FC = () => {
         const { selfRadius, orbitRadius, img } = planetData;
         const sphere = new SphereBufferGeometry(selfRadius, 60, 60);
         const textureLoader = new TextureLoader();
-        const texture = textureLoader.load(planetData.img, (texture) => {
+        textureLoader.load(planetData.img, (texture) => {
             const material = key === 'Sun' ? new MeshStandardMaterial({
                 map: texture
             }) : new MeshLambertMaterial({
@@ -78,7 +78,7 @@ export const HelloThreeJS: FC = () => {
             });
             // 创建光源
             const light = new DirectionalLight(0xFFFFFF, 0.5);
-            const sunLight = new PointLight(0xFFFFFF, 1)
+            const sunLight = new PointLight(0xFFFFFF, 1.5)
             light.position.set(0, 10, 0);
             sunLight.position.set(0, 0, 0);
             scene.add(sunLight);
