@@ -1,5 +1,5 @@
 import { useRef, useEffect, FC } from "react";
-import { Scene, WebGLRenderer, PerspectiveCamera, MeshPhongMaterial, Mesh, DirectionalLight, SphereBufferGeometry, TextureLoader, MeshBasicMaterial, MeshLambertMaterial, RingGeometry, DoubleSide, BoxBufferGeometry, Clock, PointLight, MeshStandardMaterial, Color, AmbientLight } from 'three';
+import { Scene, WebGLRenderer, PerspectiveCamera, MeshPhongMaterial, Mesh, DirectionalLight, SphereBufferGeometry, TextureLoader, MeshBasicMaterial, MeshLambertMaterial, RingGeometry, DoubleSide, BoxBufferGeometry, Clock, PointLight, MeshStandardMaterial, Color, AmbientLight, BoxGeometry } from 'three';
 import { planetConfigs } from "./config";
 import { AxesHelper } from 'three/src/helpers/AxesHelper'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -77,8 +77,8 @@ export const HelloThreeJS: FC = () => {
                 loadPlanet(key, scene);
             });
             // 创建光源
-            const light = new DirectionalLight(0xFFFFFF, 0.5);
-            const sunLight = new PointLight(0xFFFFFF, 1.5)
+            const light = new DirectionalLight(0xFFFFFF, 1);
+            const sunLight = new PointLight(0xFFFFFF, 2)
             light.position.set(0, 10, 0);
             sunLight.position.set(0, 0, 0);
             scene.add(sunLight);
@@ -121,7 +121,14 @@ export const HelloThreeJS: FC = () => {
         renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
     };
 
+    const geometry = new BoxGeometry(100, 100, 100);
+    const material = new MeshLambertMaterial({
+        color: 0x0000ff,
+    });
+    const mesh = new Mesh(geometry, material);
+
     return (
-        <canvas width={2000} height={1200} style={{ display: 'block' }} ref={canvasRef}></canvas>
+        <canvas width={1500} height={750} style={{ display: 'block' }} ref={canvasRef}></canvas>
     );
 }
+
